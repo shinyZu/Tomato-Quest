@@ -11,6 +11,7 @@ import {ValidatorForm, TextValidator} from "react-material-ui-form-validator";
 
 import MySnackBar from "../../components/common/MySnackbar/MySnackbar";
 import {Button} from "@mui/material";
+import LoginService from "../../services/LoginService";
 
 function Login(props) {
     const {classes} = props;
@@ -54,8 +55,59 @@ function Login(props) {
         });
     };
 
-    const handleSubmit = async (e) => {
-        window.location.href = "/home";
+    const loginUser = async (e) => {
+        console.log(loginFormData)
+
+        // await LoginService.login(loginFormData)
+        //     .then(res => {
+        //         if (res.status === 200) {
+        //             console.log(res)
+
+        //             setOpenAlert({
+        //                 open: true,
+        //                 alert: res.data.data,
+        //                 severity: "success",
+        //                 variant: "standard",
+        //             });
+        //         }
+        //     })
+        //     .catch(err => {
+        //         console.error(err);
+        //         setOpenAlert({
+        //             open: true,
+        //             alert: "Error",
+        //             severity: "error",
+        //             variant: "standard",
+        //         });
+        //     })
+
+
+        let res = await LoginService.login(loginFormData);
+        console.log(res);
+    
+        if (res.status === 200) {
+          if (res) {
+            setOpenAlert({
+                open: true,
+                alert: res.data.data,
+                severity: "success",
+                variant: "standard",
+            })
+            
+            setTimeout(()=>{
+                window.location.href="/home";
+            },1500)
+          }
+        } else {
+          setOpenAlert({
+            open: true,
+            alert: res.data.data,
+            severity: "error",
+            variant: "standard",
+          });
+        }
+
+        // window.location.href = "/home";
     }
 
     return (
@@ -108,7 +160,7 @@ function Login(props) {
                         </Grid>
                     </Grid>
 
-                    <ValidatorForm className="pt-2" onSubmit={handleSubmit}>
+                    <ValidatorForm className="pt-2" /* onSubmit={loginUser} */>
                         <Grid
                             item
                             container
@@ -186,7 +238,8 @@ function Login(props) {
                                 sm={2}
                                 xs={2} className={classes.btn_ok}
                                 onClick={() => {
-                                    window.location.href = "/home";
+                                    loginUser();
+                                    // window.location.href = "/home";
                                 }}
                             >
                             </Grid>
@@ -215,6 +268,15 @@ function Login(props) {
                     </ValidatorForm>
                 </Grid>
             </Grid>
+            <MySnackBar
+                open={openAlert.open}
+                alert={openAlert.alert}
+                severity={openAlert.severity}
+                variant={openAlert.variant}
+                onClose={() => {
+                    setOpenAlert({ open: false });
+                }}
+            />
         </Grid>
     )
 }
