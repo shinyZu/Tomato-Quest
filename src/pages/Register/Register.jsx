@@ -3,7 +3,6 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { styleSheet } from "./style";
 import { withStyles } from "@mui/styles";
-import styles from "./Login.module.css";
 
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
@@ -12,10 +11,11 @@ import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import MySnackBar from "../../components/common/MySnackbar/MySnackbar";
 import { Button } from "@mui/material";
 
-function Login(props) {
+function Register(props) {
   const { classes } = props; 
 
-  const [loginFormData, setLoginFormData] = useState({
+  const [registerFormData, setRegisterFormData] = useState({
+    email:"",
     username: "",
     password: "",
   });
@@ -32,13 +32,22 @@ function Login(props) {
   const [isEmailValid, setEmailValid] = useState(false);
   const [isPasswordValid, setPasswordValid] = useState(false);
 
+  const handleEmailChange = (e) => {
+    const emailValue = e.target.value;
+    // Your validation logic for the email field
+    const isValidEmail = /^[A-z|0-9]{4,}@(gmail)(.com|.lk)$/.test(emailValue);
+    setEmailValid(isValidEmail);
+    setRegisterFormData({
+      ...registerFormData,
+      email: emailValue,
+    });
+  };
+  
   const handleUsernameChange = (e) => {
     const usernameValue = e.target.value;
-    // Your validation logic for the email field
-    // const isValidEmail = /^[A-z|0-9]{4,}@(gmail)(.com|.lk)$/.test(usernameValue);
     // setEmailValid(isValidEmail);
-    setLoginFormData({
-      ...loginFormData,
+    setRegisterFormData({
+      ...registerFormData,
       username: usernameValue,
     });
   };
@@ -48,8 +57,8 @@ function Login(props) {
     // Your validation logic for the password field
     const isValidPassword = /^[A-z|0-9|@]{8,}$/.test(passwordValue);
     setPasswordValid(isValidPassword);
-    setLoginFormData({
-      ...loginFormData,
+    setRegisterFormData({
+      ...registerFormData,
       password: passwordValue,
     });
   };
@@ -120,6 +129,32 @@ function Login(props) {
               >
                 <TextValidator
                     className={classes.txt_input_container}
+                    placeholder="Email"
+                    type="email"
+                    variant="standard"
+                    size="normal"
+                    // fullWidth
+                    required={true}
+                    style={{ marginBottom: "20px"}}
+                    inputProps={{min: 0, style: { textAlign: 'center', color:"black", fontSize:"2rem" }}}
+                    validators={["matchRegexp:^[A-z|0-9]{4,}@(gmail)(.com|.lk)$"]}
+                    errorMessages={["Invalid email address"]}
+                    value={registerFormData.email}
+                    onChange={handleEmailChange}
+                />
+              </Grid>
+
+              <Grid  
+                item
+                container
+                xl={12}
+                lg={12}
+                md={12}
+                sm={12}
+                xs={12}
+              >
+                <TextValidator
+                    className={classes.txt_input_container}
                     placeholder="Username"
                     type="text"
                     variant="standard"
@@ -130,10 +165,11 @@ function Login(props) {
                     inputProps={{min: 0, style: { textAlign: 'center', color:"black", fontSize:"2rem" }}}
                     // validators={["matchRegexp:^[A-z|0-9]{4,}@(gmail)(.com|.lk)$"]}
                     // errorMessages={["Invalid email address"]}
-                    value={loginFormData.username}
+                    value={registerFormData.username}
                     onChange={handleUsernameChange}
                 />
               </Grid>
+
               <Grid  
                 item
                 container
@@ -155,7 +191,7 @@ function Login(props) {
                     inputProps={{min: 0, style: { textAlign: 'center', color:"black", fontSize:"2rem", outline:"none", border:"none"}}}
                     validators={["matchRegexp:^[A-z|0-9|@]{8,}$"]}
                     errorMessages={["Must have atleast 8 characters"]}
-                    value={loginFormData.password}
+                    value={registerFormData.password}
                     onChange={handlePasswordChange}
                   />
               </Grid>
@@ -182,8 +218,9 @@ function Login(props) {
                   }}
                 >
                 </Grid>
+              </Grid>
 
-                <Grid  
+              <Grid  
                   item
                   container
                   xl={12}
@@ -194,16 +231,14 @@ function Login(props) {
                   className={classes.footer_container}
                 >
                   <small className={classes.login_footer_text}>
-                    Not a member?{" "}
+                    Already a member?{" "}
                     <u>
-                      <Link to="/register" className={classes.txt_register}>
-                        Register
+                      <Link to="/" className={classes.txt_register}>
+                        Login
                       </Link>
                     </u>
                   </small>
                </Grid>
-                
-              </Grid>
             </ValidatorForm>
           </Grid>
       </Grid>
@@ -211,4 +246,4 @@ function Login(props) {
   )
 }
 
-export default withStyles(styleSheet)(Login);
+export default withStyles(styleSheet)(Register);

@@ -1,10 +1,5 @@
-import login_img from "../../assets/images/background/15.png"
 import bg_img from "../../assets/images/background/4.jpg"
-import btn_login from "../../assets/images/login_page/btn_login.png"
-import title_box from "../../assets/images/login_page/title_box.png"
-// import login_img from "../../assets/images/login_page/happy_tomato.png"
-
-import login_title_tag from "../../assets/images/login_page/login_title_tag.png"
+import register_title_tag from "../../assets/images/login_page/register_title_tag.png"
 import txt_input from "../../assets/images/login_page/txt_input_4.png"
 import btn_ok from "../../assets/images/login_page/btn_ok.png"
 
@@ -50,7 +45,7 @@ export const styleSheet = {
     title_tag:{
         // border: "2px solid red",
         height:"18vh",
-        backgroundImage: `url(${login_title_tag})`,
+        backgroundImage: `url(${register_title_tag})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
     },
@@ -92,72 +87,4 @@ export const styleSheet = {
         alignItems:"center",
         marginTop:"20px !important"
     },
-
-    //====================================login_v1.jsx======================
-    txt_title:{
-        height:"20vh",
-        width:"50vh",
-        backgroundImage: `url(${title_box})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        
-    },
-    
-    img_container:{
-        // border: "2px solid green",
-        height:"85vh",
-        width:"10vh",
-        backgroundImage: `url(${login_img})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
-        backdropFilter: "blur(11.8px)",
-       "-webkit-backdrop-filter": "blur(11.8px)",
-    },
-
-    form_container:{
-        border: "2px solid green",
-        display:"flex",
-        justifyContent:"center",
-        alignItems:"center",
-    },
-  
-    login_text: {
-        color: "#2c3e50",
-    },
-  
-    btn_login: {
-        backgroundColor: "#2c3e50",
-        boxShadow: "5px 5px 10px 2px rgb(7 12 8 / 50%) !important",
-        "&:hover": {
-            cursor: "pointer",
-            backgroundColor: "#34495e !important",
-        },
-    },
-  
-    btn_login_disabled: {
-        backgroundColor: "#7f8c8d !important",
-        "&:hover": {
-            cursor: "default",
-            backgroundColor: "#7f8c8d !important",
-        },
-    },
-  
-    login_footer: {
-        // border: "6px solid red",
-        display: "flex",
-        flexDirection: "column",
-    },
-  
-    login_footer_text: {
-        textAlign: "center",
-        paddingTop: "10px",
-    },
-  
-    txt_register: {
-        "&:hover": {
-            cursor: "pointer",
-        },
-    },
-
-  }
+}
