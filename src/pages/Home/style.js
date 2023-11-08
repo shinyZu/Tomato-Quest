@@ -3,6 +3,7 @@ import btn_play from "../../assets/images/home_page/btn_play.png"
 import btn_settings from "../../assets/images/controls/settings.png"
 import btn_help from "../../assets/images/controls/help.png"
 import btn_sounds from "../../assets/images/controls/sounds_on.png"
+import btn_logout from "../../assets/images/controls/timer.png"
 
 export const styleSheet = {
     container_1:{
@@ -57,8 +58,8 @@ export const styleSheet = {
     },
     settings_controls_container:{
         // border:'2px solid red',
-        height:"8vh",
-        width:"8vh",
+        height:"5vh",
+        width:"5vh",
         transform: "rotate(0deg)",
         backgroundImage: `url(${btn_settings})`,
         backgroundSize: "cover",
@@ -67,15 +68,13 @@ export const styleSheet = {
         marginBottom:"10px !important",
         "&:hover": {
             cursor: "pointer",
-            // height:"9vh",
-            // width:"9vh",
             transform: "rotate(10deg)",
         },
     },
     help_controls_container:{
         // border:'2px solid red',
-        height:"8vh",
-        width:"8vh",
+        height:"5vh",
+        width:"5vh",
         transform: "rotate(0deg)",
         backgroundImage: `url(${btn_help})`,
         backgroundSize: "cover",
@@ -83,23 +82,33 @@ export const styleSheet = {
         marginBottom:"10px !important",
         "&:hover": {
             cursor: "pointer",
-            // height:"9vh",
-            // width:"9vh",
             transform: "rotate(10deg)",
         },
     },
     sound_controls_container:{
         // border:'2px solid red',
-        height:"8vh",
-        width:"8vh",
+        height:"5vh",
+        width:"5vh",
         transform: "rotate(0deg)",
         backgroundImage: `url(${btn_sounds})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
+        marginBottom:"10px !important",
         "&:hover": {
             cursor: "pointer",
-            // height:"9vh",
-            // width:"9vh",
+            transform: "rotate(10deg)",
+        },
+    },
+    logout_controls_container:{
+        // border:'2px solid red',
+        height:"5vh",
+        width:"5vh",
+        transform: "rotate(0deg)",
+        backgroundImage: `url(${btn_logout})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        "&:hover": {
+            cursor: "pointer",
             transform: "rotate(10deg)",
         },
     },

@@ -65,7 +65,7 @@ function Game(props) {
                   onClick={()=>{window.location.reload(false);}}
                 ></Grid>
                 <Grid item className={classes.btn_home_container}
-                  onClick={()=>{window.location.href = "/";}}
+                  onClick={()=>{window.location.href = "/home";}}
                 ></Grid>
               </Grid>
           </Grid>

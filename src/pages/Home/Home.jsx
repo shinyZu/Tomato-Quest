@@ -31,6 +31,7 @@ const Home = (props) => {
                         <Grid item className={classes.settings_controls_container}></Grid>
                         <Grid item className={classes.help_controls_container}></Grid>
                         <Grid item className={classes.sound_controls_container}></Grid>
+                        <Grid item className={classes.logout_controls_container} onClick={()=>{window.location.href = "/";}}></Grid>
                     </Grid>
                 </Grid>
                 <Grid item container className={classes.bottom_container}>

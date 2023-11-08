@@ -7,7 +7,8 @@ import Login from './pages/Login/Login';
 function App() {
   return (
     <Routes>
-      <Route exact path="/" element={<Home />} />
+      <Route exact path="/" element={<Login />} />
+      <Route exact path="/home" element={<Home />} />
       <Route path="/game" element={<Game />} />
       {/* <Route path="/items" element={<ItemPage />} /> */}
       {/* <Route path="*" element={<NotFound />} /> */}
