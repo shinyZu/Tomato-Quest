@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="0e4d5d62-387d-445d-a56b-05463c4229f1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/backend/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/uob/tomatoquest/ServletInitializer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/uob/tomatoquest/TomatoQuestApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/test/java/com/uob/tomatoquest/TomatoQuestApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/public/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/public/logo192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/public/logo512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/public/manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/public/robots.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/background/1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/background/10.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/background/11.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/background/12.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/background/13.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/background/14.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/background/15.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/background/16.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/background/2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/background/3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/background/4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/background/5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/background/6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/background/7.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/background/8.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/background/9.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/controls/help.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/controls/home.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/controls/level.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/controls/next.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/controls/pause.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/controls/play.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/controls/restart.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/controls/settings.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/controls/sounds_off.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/controls/sounds_on.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/controls/timer.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/controls/timer_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/game_page/answers/0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/game_page/answers/1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/game_page/answers/eight.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/game_page/answers/five.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/game_page/answers/four.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/game_page/answers/nine.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/game_page/answers/one.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/game_page/answers/seven.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/game_page/answers/six.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/game_page/answers/three.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/game_page/answers/two.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/game_page/answers/zero.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/game_page/correct_score.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/game_page/equation_qs.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/game_page/green_tick.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/game_page/happy_tomato.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/game_page/qs_board.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/game_page/qs_board_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/game_page/red_cross.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/game_page/tomato_qs_board.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/game_page/wooden_board_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/game_page/wooden_board_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/game_page/wooden_board_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/game_page/wrong_score.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/home_page/btn_play.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/login_page/btn_login.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/login_page/btn_ok.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/login_page/happy_tomato.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/login_page/login_title_tag.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/login_page/register_title_tag.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/login_page/title_box.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/login_page/txt_input_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/login_page/txt_input_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/login_page/txt_input_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/images/login_page/txt_input_4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/common/MySnackbar/MySnackbar.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/common/MySnackbar/styles.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Game/Game.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Game/style.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Home/Home.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Home/style.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Login/Login.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Login/Login.module.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Login/LoginForm.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Login/Login_v1.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Login/style.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Register/Register.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Register/style.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/reportWebVitals.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/setupTests.js" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="2Xt7wbUUJdQB8aBu2Ii67XAE40c" />
+  <component name="ProjectViewState">
+    <option name="flattenModules" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/tomato-quest-backend" />
+    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2816092" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0e4d5d62-387d-445d-a56b-05463c4229f1" name="Default Changelist" comment="" />
+      <created>1699436761172</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1699436761172</updated>
+      <workItem from="1699436766865" duration="169000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="748" y="1381" key="FileChooserDialogImpl" timestamp="1699436934457">
+      <screen x="0" y="1080" width="1920" height="1080" />
+    </state>
+    <state x="748" y="1381" key="FileChooserDialogImpl/0.0.1920.1080/0.1080.1920.1080@0.1080.1920.1080" timestamp="1699436934457" />
+  </component>
+</project>
