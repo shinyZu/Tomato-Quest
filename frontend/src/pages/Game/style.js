@@ -14,6 +14,7 @@ import score_wrong_icon from "../../assets/images/game_page/wrong_score.png"
 
 import qs_board from "../../assets/images/game_page/qs_board.png"
 // import qs_board from "../../assets/images/game_page/qs_board_2.png"
+// import qs_board from "../../assets/images/game_page/wooden_board_3.png"
 import sample_qs from "../../assets/images/game_page/equation_qs.png"
 
 import answer_0 from "../../assets/images/game_page/answers/zero.png"
@@ -50,13 +51,14 @@ export const styleSheet = {
         display:"flex",
         justifyContent:"flex-start", 
         alignItems:"center", 
-        paddingLeft:"10px",
+        paddingLeft:"50px",
     },
     controls_right_container:{
         // border:'2px solid blue',
         display:"flex",
         justifyContent:"flex-end", 
-        alignItems:"center" 
+        alignItems:"center" ,
+        paddingRight:"50px",
     },
     //----------------------------------------------------------
     btn_home_container:{
@@ -188,7 +190,7 @@ export const styleSheet = {
         backgroundImage: `url(${score_correct_icon})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
-        marginLeft:"10px !important",
+        marginLeft:"50px !important",
         marginRight:"10px !important",
         
     },
@@ -199,7 +201,7 @@ export const styleSheet = {
         backgroundImage: `url(${score_wrong_icon})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
-        marginLeft:"10px !important",
+        marginLeft:"50px !important",
         marginRight:"10px !important",
 
     },
@@ -216,8 +218,6 @@ export const styleSheet = {
     },
     qs_board_container:{
         // border:'2px solid red',
-        // height: "80vh",
-        // width: "85vh",
         height: "65vh",
         width: "60vh",
         backgroundImage: `url(${qs_board})`,
@@ -228,6 +228,7 @@ export const styleSheet = {
         alignItems:"center",
         // backgroundPositionY:"10px", //qs_board_2
         backgroundPositionY:"-30px", // qs_board
+        marginLeft:"-150px !important",
     },
     qs_container:{
         // border:'2px solid blue',
