@@ -10,6 +10,7 @@ import {ValidatorForm, TextValidator} from "react-material-ui-form-validator";
 
 import MySnackBar from "../../components/common/MySnackbar/MySnackbar";
 import {Button} from "@mui/material";
+import PlayerService from "../../services/PlayerService";
 
 function Register(props) {
     const {classes} = props;
@@ -63,8 +64,31 @@ function Register(props) {
         });
     };
 
-    const handleSubmit = async (e) => {
-        window.location.href = "/home";
+    const registerUser = async (e) => {
+        let res = await PlayerService.createPlayer(registerFormData);
+        
+        if (res.status === 200) {
+            if (res) {
+              console.log(res);
+            setOpenAlert({
+                open: true,
+                alert: res.data.data,
+                severity: "success",
+                variant: "standard",
+            })
+
+            setTimeout(()=>{
+                window.location.href="/home";
+            },1500)
+          }
+        } else {
+          setOpenAlert({
+            open: true,
+            alert: res.data.data,
+            severity: "error",
+            variant: "standard",
+          });
+        }
     }
 
     return (
@@ -117,7 +141,7 @@ function Register(props) {
                         </Grid>
                     </Grid>
 
-                    <ValidatorForm className="pt-2" onSubmit={handleSubmit}>
+                    <ValidatorForm className="pt-2" /* onSubmit={handleSubmit} */>
                         <Grid
                             item
                             container
@@ -222,7 +246,8 @@ function Register(props) {
                                 sm={2}
                                 xs={2} className={classes.btn_ok}
                                 onClick={() => {
-                                    window.location.href = "/home";
+                                    registerUser()
+                                    // window.location.href = "/home";
                                 }}
                             >
                             </Grid>

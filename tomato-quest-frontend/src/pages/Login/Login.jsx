@@ -80,8 +80,7 @@ function Login(props) {
         //             variant: "standard",
         //         });
         //     })
-
-
+        
         let res = await LoginService.login(loginFormData);
         console.log(res);
     
@@ -93,7 +92,7 @@ function Login(props) {
                 severity: "success",
                 variant: "standard",
             })
-            
+
             setTimeout(()=>{
                 window.location.href="/home";
             },1500)

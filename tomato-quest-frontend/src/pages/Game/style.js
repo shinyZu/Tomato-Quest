@@ -31,6 +31,12 @@ import answer_9 from "../../assets/images/game_page/answers/nine.png"
 import green_tick from "../../assets/images/game_page/green_tick.png"
 import red_cross from "../../assets/images/game_page/red_cross.png"
 
+import bg_pause from "../../assets/images/game_page/img_pause.png"
+import img_gameover from "../../assets/images/game_page/img_gameover.png"
+import img_gamewin from "../../assets/images/game_page/img_gamewin_2.png"
+
+import styled, { keyframes } from 'styled-components';
+
 export const styleSheet = {
     main_container: {
         // border:'2px solid black',
@@ -130,7 +136,7 @@ export const styleSheet = {
         height: "5vh",
         width: "5vh",
         transform: "rotate(0deg)",
-        backgroundImage: `url(${btn_sound})`,
+        // backgroundImage: `url(${btn_sound})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         marginRight: "10px !important",
@@ -471,6 +477,117 @@ export const styleSheet = {
             // height:"12vh",
             // width:"12vh",
         },
-
+        
     },
+
+    //----------------------------------
+    pause_bg:{
+        // border:'2px solid blue',
+        height: "65vh",
+        width: "65vh",
+        backgroundImage: `url(${bg_pause})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundPositionY:"-30px"
+    },
+    gameover_bg:{
+        // border:'2px solid blue',
+        height: "65vh",
+        width: "80vh",
+        backgroundImage: `url(${img_gameover})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundPositionY:"-30px",
+        backdropFilter: "blur(4px)",
+    },
+    // gamewin_bg:{
+    //     border:'2px solid blue',
+    //     height: "55vh",
+    //     width: "65vh",
+    //     backgroundImage: `url(${img_gamewin})`,
+    //     backgroundSize: "cover",
+    //     backgroundPosition: "center",
+    //     backdropFilter: "blur(4px)",
+    //     transition: "transform 2s ease-in-out", // Animation transition
+    //     "&.rotate": {
+    //         transform: "rotate(360deg)", // Apply the rotation
+    //     },
+    // },
 }
+
+//--------------------Animations--------------------
+
+// For game win banner
+const zoomRotateKeyframes = keyframes`
+  /* 0%, 100% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.2) rotate(40deg);
+  } */
+  0% {
+        transform: scale(1) rotate(0deg);
+    }
+
+    25% {
+        transform: scale(1.2) rotate(180deg);
+    }
+
+    50% {
+        transform: scale(1)rotate(360deg);
+    }
+
+    75% {
+        transform: scale(1.2) rotate(-180deg);
+    }
+
+    100% {
+        transform: scale(1)rotate(360deg);
+    }
+`;
+
+export const AnimateOnWin = styled.div`
+  height: 55vh;
+  width: 65vh;
+  background-image: url(${img_gamewin});
+  background-size: cover;
+  background-position: center;
+  backdrop-filter: blur(4px);
+  /* animation: ${zoomRotateKeyframes} 2s linear 2; */
+  animation: ${zoomRotateKeyframes} 4s linear;
+  animation-fill-mode: forwards;
+`;
+
+// For game over banner
+const gameOverKeyframes = keyframes`
+    0% {
+        opacity: 0;
+    }
+
+    25% {
+        opacity: 0.25;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    75% {
+        opacity: 0.75;
+    }
+
+    100% {
+        opacity: 1;
+    }
+`;
+
+export const AnimateOnGameOver = styled.div`
+  height: 65vh;
+  width: 80vh;
+  background-image: url(${img_gameover});
+  background-size: cover;
+  background-position: center;
+  backdrop-filter: blur(4px);
+  animation: ${gameOverKeyframes} 4s linear;
+  animation-fill-mode: forwards;
+`;
