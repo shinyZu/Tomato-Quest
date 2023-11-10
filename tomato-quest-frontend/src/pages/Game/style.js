@@ -1,4 +1,4 @@
-import background from "../../assets/images/background/9.jpg"
+import background from "../../assets/images/background/14.jpg"
 
 import btn_home from "../../assets/images/controls/home.png"
 import btn_restart from "../../assets/images/controls/restart.png"
@@ -408,7 +408,7 @@ export const styleSheet = {
     },
     green_tick_main_container: {
         // border:'2px solid red',
-        height: "80vh",
+        // height: "80vh",
         width: "85vh",
         display: "flex",
         flexDirection: "column",
@@ -425,7 +425,7 @@ export const styleSheet = {
     },
     red_cross_main_container: {
         // border:'2px solid red',
-        height: "80vh",
+        // height: "80vh",
         width: "85vh",
         display: "flex",
         flexDirection: "column",

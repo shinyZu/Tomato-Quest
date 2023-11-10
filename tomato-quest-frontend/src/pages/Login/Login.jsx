@@ -31,13 +31,13 @@ function Login(props) {
     });
 
     const [isEmailValid, setEmailValid] = useState(false);
+    const [isUsernameValid, setUsernameValid] = useState(false);
     const [isPasswordValid, setPasswordValid] = useState(false);
 
     const handleUsernameChange = (e) => {
         const usernameValue = e.target.value;
-        // Your validation logic for the email field
-        // const isValidEmail = /^[A-z|0-9]{4,}@(gmail)(.com|.lk)$/.test(usernameValue);
-        // setEmailValid(isValidEmail);
+        const isValidUsername = /^[A-z|0-9]{5,}$/.test(usernameValue);
+        setUsernameValid(isValidUsername);
         setLoginFormData({
             ...loginFormData,
             username: usernameValue,
@@ -58,55 +58,73 @@ function Login(props) {
     const loginUser = async (e) => {
         console.log(loginFormData)
 
-        // await LoginService.login(loginFormData)
-        //     .then(res => {
-        //         if (res.status === 200) {
-        //             console.log(res)
-
-        //             setOpenAlert({
-        //                 open: true,
-        //                 alert: res.data.data,
-        //                 severity: "success",
-        //                 variant: "standard",
-        //             });
-        //         }
-        //     })
-        //     .catch(err => {
-        //         console.error(err);
-        //         setOpenAlert({
-        //             open: true,
-        //             alert: "Error",
-        //             severity: "error",
-        //             variant: "standard",
-        //         });
-        //     })
-        
-        let res = await LoginService.login(loginFormData);
-        console.log(res);
+        // let res = await LoginService.login(loginFormData);
+        // console.log(res);
     
-        if (res.status === 200) {
-          if (res) {
-            setOpenAlert({
-                open: true,
-                alert: res.data.data,
-                severity: "success",
-                variant: "standard",
+        // if (res.status === 200) {
+        //   if (res) {
+        //     setOpenAlert({
+        //         open: true,
+        //         alert: res.data.message,
+        //         severity: "success",
+        //         variant: "standard",
+        //     })
+
+        //     // Converting the loginFormData object to a JSON string and store it in localStorage
+        //     localStorage.setItem('loggedPlayer', JSON.stringify(loginFormData));
+
+        //     setTimeout(()=>{
+        //         window.location.href="/home";
+        //     },2000)
+        //   }
+        // } else {
+        //   setOpenAlert({
+        //     open: true,
+        //     alert: res.response.data.message,
+        //     severity: "error",
+        //     variant: "standard",
+        //   });
+        // }
+
+
+        await LoginService.login(loginFormData)
+            .then(res => {
+                console.log(res);
+               
+                if (res.status === 200) {
+                    if (res) {
+                      setOpenAlert({
+                          open: true,
+                          alert: res.data.message,
+                          severity: "success",
+                          variant: "standard",
+                      })
+          
+                      // Converting the loginFormData object to a JSON string and store it in localStorage
+                      localStorage.setItem('loggedPlayer', JSON.stringify(loginFormData));
+          
+                      setTimeout(()=>{
+                          window.location.href="/home";
+                      },2000)
+                    }
+                } else {
+                    setOpenAlert({
+                      open: true,
+                      alert: res.response.data.message,
+                      severity: "error",
+                      variant: "standard",
+                    });
+                }
+
             })
-
-            setTimeout(()=>{
-                window.location.href="/home";
-            },1500)
-          }
-        } else {
-          setOpenAlert({
-            open: true,
-            alert: res.data.data,
-            severity: "error",
-            variant: "standard",
-          });
-        }
-
-        // window.location.href = "/home";
+            .catch(error => {
+                setOpenAlert({
+                    open: true,
+                    alert: "Error!",
+                    severity: "error",
+                    variant: "standard",
+                })
+            })
     }
 
     return (
@@ -159,7 +177,7 @@ function Login(props) {
                         </Grid>
                     </Grid>
 
-                    <ValidatorForm className="pt-2" /* onSubmit={loginUser} */>
+                    <ValidatorForm className="pt-2" onSubmit={loginUser}>
                         <Grid
                             item
                             container
@@ -176,11 +194,11 @@ function Login(props) {
                                 variant="standard"
                                 size="normal"
                                 // fullWidth
-                                required={true}
+                                // required={true}
                                 style={{marginBottom: "20px"}}
                                 inputProps={{min: 0, style: {textAlign: 'center', color: "black", fontSize: "2rem"}}}
-                                // validators={["matchRegexp:^[A-z|0-9]{4,}@(gmail)(.com|.lk)$"]}
-                                // errorMessages={["Invalid email address"]}
+                                validators={["matchRegexp:^[A-z|0-9]{5,}$"]}
+                                errorMessages={["Invalid email address"]}
                                 value={loginFormData.username}
                                 onChange={handleUsernameChange}
                             />
@@ -201,7 +219,7 @@ function Login(props) {
                                 variant="standard"
                                 size="normal"
                                 // fullWidth
-                                required={true}
+                                // required={true}
                                 style={{marginBottom: "20px"}}
                                 inputProps={{min: 0,
                                     style: {
@@ -235,12 +253,17 @@ function Login(props) {
                                 lg={2}
                                 md={2}
                                 sm={2}
-                                xs={2} className={classes.btn_ok}
+                                xs={2} 
+                                /* className={classes.btn_ok}
                                 onClick={() => {
                                     loginUser();
-                                    // window.location.href = "/home";
-                                }}
+                                }} */
                             >
+                                <Button 
+                                    type="submit"
+                                    disabled={isUsernameValid && isPasswordValid ? false : true}
+                                    className={classes.btn_ok} 
+                                ></Button>
                             </Grid>
 
                             <Grid

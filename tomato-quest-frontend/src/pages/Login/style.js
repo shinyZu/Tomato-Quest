@@ -75,7 +75,7 @@ export const styleSheet = {
     },
     btn_ok: {
         // border: "2px solid blue",
-        height: "10vh",
+        height: "8vh",
         backgroundImage: `url(${btn_ok})`,
         backgroundSize: "cover",
         backgroundPosition: "center",

@@ -14,8 +14,9 @@ import javax.persistence.Id;
 @Data
 @ToString
 public class Player {
+
+//    private int player_id;
     @Id
-    private int player_id;
     private String email;
     private String username;
     private String password;

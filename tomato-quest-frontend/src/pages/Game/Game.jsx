@@ -46,6 +46,7 @@ function Game(props) {
     const [displayQSBoard, setDisplayQSBoard] = useState(true);
     const [isGameTrackPlaying, setIsGameTrackPlaying] = useState(false);
     const [isGamePaused, setIsGamePaused] = useState(false);
+    const [isGamePausedForAnswerCheck, setIsGamePausedForAnswerCheck] = useState(false);
     const [time, setTime] = useState(30);
     const [isTimeOver, setIsTimeOver] = useState(false);
 
@@ -97,6 +98,9 @@ function Game(props) {
 
     // To check the answer
     const checkAnswer = (selectedAnswer) => {
+        setIsGameTrackPlaying(false)
+        handlePauseResume()
+        // setIsGamePausedForAnswerCheck(true)
         if(selectedAnswer == 5) {
             console.log("Answer is correct play the success track")
             sfx.game_track.stop();
@@ -118,28 +122,60 @@ function Game(props) {
     //     sfx.game_track.play();
     // },[])
     
-    useEffect(() => {
-        if (!isGamePaused) {
-            const timer = setInterval(() => {
-                if (time > 0) {
-                    setTime(time - 1);
-                } else {
-                    clearInterval(timer);
-                    // Timer has reached 0, you can trigger actions or stop the timer here
-                    if (!isTimeOver) { // Check if the game over track hasn't been played yet
-                        setIsTimeOver(true);
-                        sfx.game_track.stop();
-                        sfx.gameover_track.play();
-                        // sfx.gamewin_track.play();
-                    }
-                }
-            }, 1000);
+    // useEffect(() => {
+    //     if (!isGamePaused) {
+    //         const timer = setInterval(() => {
+    //             if (time > 0) {
+    //                 setTime(time - 1);
+    //             } else {
+    //                 clearInterval(timer);
+    //                 // Timer has reached 0, you can trigger actions or stop the timer here
+    //                 if (!isTimeOver) { // Check if the game over track hasn't been played yet
+    //                     setIsTimeOver(true);
+                        // sfx.game_track.stop();
+                        // sfx.gameover_track.play();
+                        // // sfx.gamewin_track.play();
+    //                 }
+    //             }
+    //         }, 1000);
         
-        return () => {
-            clearInterval(timer); // Clear the timer when the component unmounts
-          };
+    //     return () => {
+    //         clearInterval(timer); // Clear the timer when the component unmounts
+    //       };
+    //     }
+    //   }, [time, isGamePaused, isTimeOver]);
+
+
+    useEffect(() => {
+        let timer;
+    
+        if (!isGamePaused && !isGamePausedForAnswerCheck) {
+          timer = setInterval(() => {
+            if (time > 0) {
+              setTime((prevTime) => prevTime - 1);
+            } else {
+              clearInterval(timer);
+              // Timer has reached 0, you can trigger actions or stop the timer here
+              if (!isTimeOver) {
+                // Check if the game over track hasn't been played yet
+                setIsTimeOver(true);
+                sfx.game_track.stop();
+                sfx.gameover_track.play();
+                // sfx.gamewin_track.play();
+              }
+            }
+          }, 1000);
         }
-      }, [time, isGamePaused, isTimeOver]);
+    
+        return () => {
+          clearInterval(timer); // Clear the timer when the component unmounts or when the timer is paused
+        };
+      }, [time, isGamePaused, isTimeOver, isGamePausedForAnswerCheck]);
+
+
+      const handlePauseResume = () => {
+        setIsGamePausedForAnswerCheck((prevIsGamePausedForAnswerCheck) => !prevIsGamePausedForAnswerCheck);
+      };
       
     return (
         

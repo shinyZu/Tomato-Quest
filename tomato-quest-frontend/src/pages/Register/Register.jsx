@@ -31,6 +31,7 @@ function Register(props) {
     });
 
     const [isEmailValid, setEmailValid] = useState(false);
+    const [isUsernameValid, setUsernameValid] = useState(false);
     const [isPasswordValid, setPasswordValid] = useState(false);
 
     const handleEmailChange = (e) => {
@@ -46,7 +47,8 @@ function Register(props) {
 
     const handleUsernameChange = (e) => {
         const usernameValue = e.target.value;
-        // setEmailValid(isValidEmail);
+        const isValidUsername = /^[A-z|0-9]{5,}$/.test(usernameValue);
+        setUsernameValid(isValidUsername);
         setRegisterFormData({
             ...registerFormData,
             username: usernameValue,
@@ -65,26 +67,31 @@ function Register(props) {
     };
 
     const registerUser = async (e) => {
+        console.log(registerFormData);
         let res = await PlayerService.createPlayer(registerFormData);
+        console.log(res)
         
-        if (res.status === 200) {
+        if (res.status === 201) {
             if (res) {
-              console.log(res);
-            setOpenAlert({
-                open: true,
-                alert: res.data.data,
-                severity: "success",
-                variant: "standard",
-            })
+                console.log(res);
+                setOpenAlert({
+                    open: true,
+                    alert: res.data.message,
+                    severity: "success",
+                    variant: "standard",
+                })
 
-            setTimeout(()=>{
-                window.location.href="/home";
-            },1500)
-          }
+                // Converting the loginFormData object to a JSON string and store it in localStorage
+                localStorage.setItem('loggedPlayer', JSON.stringify(registerFormData));
+
+                setTimeout(()=>{
+                    window.location.href="/home";
+                },1500)
+            }
         } else {
           setOpenAlert({
             open: true,
-            alert: res.data.data,
+            alert: res.response.data.message,
             severity: "error",
             variant: "standard",
           });
@@ -141,7 +148,7 @@ function Register(props) {
                         </Grid>
                     </Grid>
 
-                    <ValidatorForm className="pt-2" /* onSubmit={handleSubmit} */>
+                    <ValidatorForm className="pt-2" onSubmit={registerUser}>
                         <Grid
                             item
                             container
@@ -158,7 +165,7 @@ function Register(props) {
                                 variant="standard"
                                 size="normal"
                                 // fullWidth
-                                required={true}
+                                // required={true}
                                 style={{marginBottom: "20px"}}
                                 inputProps={{min: 0, style: {textAlign: 'center', color: "black", fontSize: "2rem"}}}
                                 validators={["matchRegexp:^[A-z|0-9]{4,}@(gmail)(.com|.lk)$"]}
@@ -184,11 +191,11 @@ function Register(props) {
                                 variant="standard"
                                 size="normal"
                                 // fullWidth
-                                required={true}
+                                // required={true}
                                 style={{marginBottom: "20px"}}
                                 inputProps={{min: 0, style: {textAlign: 'center', color: "black", fontSize: "2rem"}}}
-                                // validators={["matchRegexp:^[A-z|0-9]{4,}@(gmail)(.com|.lk)$"]}
-                                // errorMessages={["Invalid email address"]}
+                                validators={["matchRegexp:^[A-z|0-9]{5,}$"]}
+                                errorMessages={["Should have atleast 5 character"]}
                                 value={registerFormData.username}
                                 onChange={handleUsernameChange}
                             />
@@ -210,7 +217,7 @@ function Register(props) {
                                 variant="standard"
                                 size="normal"
                                 // fullWidth
-                                required={true}
+                                // required={true}
                                 style={{marginBottom: "20px"}}
                                 inputProps={{min: 0,
                                     style: {
@@ -244,12 +251,17 @@ function Register(props) {
                                 lg={2}
                                 md={2}
                                 sm={2}
-                                xs={2} className={classes.btn_ok}
+                                xs={2} 
+                                /* className={classes.btn_ok}
                                 onClick={() => {
                                     registerUser()
-                                    // window.location.href = "/home";
-                                }}
+                                }} */
                             >
+                                <Button 
+                                    type="submit"
+                                    disabled={isEmailValid && isUsernameValid && isPasswordValid ? false : true}
+                                    className={classes.btn_ok} 
+                                ></Button>
                             </Grid>
                         </Grid>
 
@@ -275,6 +287,15 @@ function Register(props) {
                     </ValidatorForm>
                 </Grid>
             </Grid>
+            <MySnackBar
+                open={openAlert.open}
+                alert={openAlert.alert}
+                severity={openAlert.severity}
+                variant={openAlert.variant}
+                onClose={() => {
+                    setOpenAlert({ open: false });
+                }}
+            />
         </Grid>
     )
 }

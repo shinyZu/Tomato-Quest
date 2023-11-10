@@ -17,6 +17,6 @@ public class Game {
     private int game_id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "player_id", referencedColumnName = "player_id")
+    @JoinColumn(name = "email", referencedColumnName = "email")
     private Player player;
 }
