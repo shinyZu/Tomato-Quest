@@ -4,11 +4,14 @@ import {styleSheet} from "./style";
 
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
+import MySnackBar from "../../components/common/MySnackbar/MySnackbar";
 
 import btn_sound_on from "../../assets/images/controls/sounds_on.png"
 import btn_sound_off from "../../assets/images/controls/sounds_off.png"
 import btn_play from "../../assets/images/controls/play.png"
 import btn_pause from "../../assets/images/controls/pause.png"
+
+import sample_qs from "../../assets/images/game_page/equation_qs.png"
 
 import {Howl, Howler} from 'howler';
 import game_track from "../../assets/audio/game_track.mp3"
@@ -19,6 +22,7 @@ import gamewin_track from "../../assets/audio/game_win_2.mp3"
 
 import { AnimateOnWin } from './style'; 
 import { AnimateOnGameOver } from './style'; 
+import GameService from '../../services/GameService';
 
 var sfx = {
     game_track : new Howl({
@@ -40,15 +44,40 @@ var sfx = {
 
 function Game(props) {
     const {classes} = props;
+    
     const [isAnswerCorrect, setIsAnswerCorrect] = useState(false);
     const [isAnswerWrong, setIsAnswerWrong] = useState(false);
     const [isAnswered, setIsAnswered] = useState(false);
+    
     const [displayQSBoard, setDisplayQSBoard] = useState(true);
     const [isGameTrackPlaying, setIsGameTrackPlaying] = useState(false);
+
     const [isGamePaused, setIsGamePaused] = useState(false);
     const [isGamePausedForAnswerCheck, setIsGamePausedForAnswerCheck] = useState(false);
+
     const [time, setTime] = useState(30);
     const [isTimeOver, setIsTimeOver] = useState(false);
+    
+    const [isGameOver, setIsGameOver] = useState(false);
+    const [isGameWin, setIsGameWin] = useState(false);
+
+    const [randomQs, setRandomQs] = useState(sample_qs);
+    const [solution, setSolution] = useState(0);
+    
+    const [successScore, setSuccessScore] = useState(0);
+    const [failScore, setFailScore] = useState(3);
+    
+    const [currentLevel, setCurrentLevel] = useState(1);
+    const [level1Rounds, setLevel1Rounds] = useState(2);
+    const [level2Rounds, setLevel2Rounds] = useState(3);
+    const [level3Rounds, setLevel3Rounds] = useState(4);
+
+    const [openAlert, setOpenAlert] = useState({
+        open: false,
+        alert: "",
+        severity: "warning",
+        variant: "",
+    });
 
     // To handle the game sound track
     const handleSound = () => {
@@ -101,50 +130,69 @@ function Game(props) {
         setIsGameTrackPlaying(false)
         handlePauseResume()
         // setIsGamePausedForAnswerCheck(true)
-        if(selectedAnswer == 5) {
+        if(selectedAnswer == solution) {
             console.log("Answer is correct play the success track")
             sfx.game_track.stop();
             sfx.success_track.play()
             setIsAnswerCorrect(true)
             setDisplayQSBoard(false)
+            setSuccessScore((prevScore) => prevScore + 10)
         } else{
             console.log("Answer is wrong play the defeat track")
             sfx.game_track.stop();
             sfx.fail_track.play()
+            if(failScore == 0) setIsAnswerWrong(false)
+            // if (failScore >= 1) {
             setIsAnswerCorrect(false)
             setDisplayQSBoard(false)
-
+            setFailScore((prevScore) => {
+                if ((prevScore - 1) > 0) {
+                    return prevScore - 1
+                } else {
+                    console.log("Max limit reached. GAMEOVER")
+                    // setIsAnswerWrong(false)
+                    setIsTimeOver(true);
+                    setIsGameOver(true)
+                    sfx.fail_track.stop();
+                    sfx.game_track.stop();
+                    sfx.gameover_track.play();
+                    return prevScore - 1
+                }
+            })
+            // } 
+            /* else {
+                setIsTimeOver(true);
+                sfx.fail_track.stop();
+                sfx.game_track.stop();
+                sfx.gameover_track.play();
+            } */
         }
     }
 
-    // useEffect(()=>{
-    //     setIsGameTrackPlaying(true)
-    //     sfx.game_track.play();
-    // },[])
-    
-    // useEffect(() => {
-    //     if (!isGamePaused) {
-    //         const timer = setInterval(() => {
-    //             if (time > 0) {
-    //                 setTime(time - 1);
-    //             } else {
-    //                 clearInterval(timer);
-    //                 // Timer has reached 0, you can trigger actions or stop the timer here
-    //                 if (!isTimeOver) { // Check if the game over track hasn't been played yet
-    //                     setIsTimeOver(true);
-                        // sfx.game_track.stop();
-                        // sfx.gameover_track.play();
-                        // // sfx.gamewin_track.play();
-    //                 }
-    //             }
-    //         }, 1000);
-        
-    //     return () => {
-    //         clearInterval(timer); // Clear the timer when the component unmounts
-    //       };
-    //     }
-    //   }, [time, isGamePaused, isTimeOver]);
+    const loadQuestion = async () => {
+        console.log("loading question.......");
+        console.log("successScore: ", successScore);
+        console.log("failScore: ", failScore);
 
+        await GameService.generateRandomQuestion()
+            .then(res => {
+                console.log(res.data);
+                setRandomQs(res.data.question)
+                setSolution(res.data.solution)
+            })
+            .catch(error => {
+                setOpenAlert({
+                    open: true,
+                    alert: "Error!",
+                    severity: "error",
+                    variant: "standard",
+                })
+            })
+    }
+
+    useEffect(()=>{
+        loadQuestion();
+    },[])
 
     useEffect(() => {
         let timer;
@@ -159,9 +207,9 @@ function Game(props) {
               if (!isTimeOver) {
                 // Check if the game over track hasn't been played yet
                 setIsTimeOver(true);
+                setIsGameOver(true)
                 sfx.game_track.stop();
                 sfx.gameover_track.play();
-                // sfx.gamewin_track.play();
               }
             }
           }, 1000);
@@ -210,7 +258,7 @@ function Game(props) {
                     {/* <Grid item className={classes.btn_labels}>00:30</Grid> */}
                     <Grid item className={classes.btn_labels}>{`00:${time < 10 ? `0${time}` : time}`}</Grid>
                     <Grid item className={classes.btn_level_container}></Grid>
-                    <Grid item className={classes.btn_labels}>Level: 1</Grid>
+                    <Grid item className={classes.btn_labels}>Level: {currentLevel}</Grid>
                 </Grid>
 
                 {/* Left side control buttons */}
@@ -239,11 +287,21 @@ function Game(props) {
                         onClick={resumeGame}
                     ></Grid> */}
 
-                    <Grid item className={classes.btn_restart_container}
-                          onClick={() => {
-                              window.location.reload(false);
-                          }}
-                    ></Grid>
+                    {!isAnswerCorrect && 
+                        <Grid item className={classes.btn_restart_container}
+                            onClick={() => {
+                                    if(failScore == 0 || isGameOver || isGameWin) {
+                                          window.location.reload(false);
+                                        // loadQuestion();
+                                        return
+                                    }
+                                    if(isAnswerCorrect) setIsAnswerCorrect(false)
+                                    if(isAnswerWrong) setIsAnswerWrong(false)
+                                    handlePauseResume()
+                                    setDisplayQSBoard(true)
+                            }}
+                        ></Grid>
+                    }
 
                     <Grid item className={classes.btn_home_container}
                           onClick={() => {
@@ -268,12 +326,12 @@ function Game(props) {
                     {/* Correct score icon & score in text */}
                     <Grid item container className={classes.icon_correct_score_container}>
                         <Grid item className={classes.icon_correct_score}></Grid>
-                        <Grid item className={classes.lbl_scores}>X 15</Grid>
+                        <Grid item className={classes.lbl_scores}>X {successScore}</Grid>
                     </Grid>
                     {/* Incorrect score icon & score in text */}
                     <Grid item container className={classes.icon_correct_score_container}>
                         <Grid item className={classes.icon_wrong_score}></Grid>
-                        <Grid item className={classes.lbl_scores}>X 2</Grid>
+                        <Grid item className={classes.lbl_scores}>X {failScore}</Grid>
                     </Grid>
                 </Grid>
 
@@ -289,7 +347,7 @@ function Game(props) {
                               style={{filter: isGamePaused ? "blur(8px)" : "none", "-webkit-filter": isGamePaused || isTimeOver ? "blur(2px)" : "none"}}
                         >
                             <Grid item className={classes.qs_board_container}>
-                                <Grid item className={classes.qs_container}></Grid>
+                                <Grid item className={classes.qs_container} style={{backgroundImage: `url(${randomQs})`}}></Grid>
                             </Grid>
                         </Grid>
                     </>
@@ -320,11 +378,30 @@ function Game(props) {
                         >
                             <Grid item className={classes.gamewin_bg}>
                                 {/* <Grid item className={classes.gamewin_bg}></Grid> */}
-                                {/* <AnimateOnWin></AnimateOnWin> */}
                                 <AnimateOnGameOver></AnimateOnGameOver>
+                                 {/* <AnimateOnWin></AnimateOnWin> */}
                             </Grid>
                         </Grid>
                     </>
+                )}
+
+                {isGameWin && (
+                     <>
+                     {/* Game Win image */}
+                     <Grid item container className={classes.qs_board_main_container}
+                         xl={11}
+                         lg={11}
+                         md={11}
+                         sm={11}
+                         xs={11}
+                     >
+                         <Grid item className={classes.gamewin_bg}>
+                             {/* <Grid item className={classes.gamewin_bg}></Grid> */}
+                             {/* <AnimateOnGameOver></AnimateOnGameOver> */}
+                              <AnimateOnWin></AnimateOnWin>
+                         </Grid>
+                     </Grid>
+                 </>
                 )}
 
                 {!displayQSBoard && isAnswerCorrect ? ( // if answer is correct
@@ -339,7 +416,7 @@ function Game(props) {
                         >
                             <Grid item container className={classes.green_tick_main_container}>
                                 <Grid item container className={classes.txt_answer_container}>
-                                    <Typography variant='h4'>Correct Answer is : 5</Typography>
+                                    <Typography variant='h4'>Correct Answer is : {solution}</Typography>
                                 </Grid>
                                 <Grid item className={classes.happy_tomato_container}></Grid>
                                 <Grid item container justifyContent='center'>
@@ -347,11 +424,73 @@ function Game(props) {
                                 </Grid>
                             </Grid>
                             <Grid container justifyContent='flex-end'>
-                                <Grid item className={classes.btn_next_container}></Grid>
+                                <Grid 
+                                    item 
+                                    className={classes.btn_next_container}
+                                    onClick={()=>{
+                                        console.log("clicked NEXT btn")
+                                        if(isAnswerCorrect) setIsAnswerCorrect(false)
+                                        if(isAnswerWrong) setIsAnswerWrong(false)
+                                        handlePauseResume()
+                                        setDisplayQSBoard(true)
+                                        loadQuestion();
+
+                                        if (currentLevel == 1) {
+                                            setLevel1Rounds((prevRounds) => prevRounds -1)
+                                            console.log("level1Rounds - ", level1Rounds )
+                                            if(level1Rounds == 1) {
+                                                console.log("Move to level 2")
+                                                setCurrentLevel(2)
+                                                setTime(50)
+                                            }
+                                        } else if (currentLevel == 2) {
+                                            setLevel2Rounds((prevRounds) => prevRounds -1)
+                                            console.log("level1Rounds - ", level2Rounds )
+                                            if(level2Rounds == 1) {
+                                                console.log("Move to level 3")
+                                                setCurrentLevel(3)
+                                                setTime(60)
+                                            }
+                                        } else if (currentLevel == 3) {
+                                            setLevel3Rounds((prevRounds) => prevRounds -1)
+                                            console.log("level1Rounds - ", level3Rounds )
+                                            if(level3Rounds == 1) {
+                                                console.log("Win the game")
+                                                setIsGameWin(true);
+                                                setDisplayQSBoard(false);
+                                                handlePauseResume()
+                                                if(isAnswerCorrect) setIsAnswerCorrect(false)
+                                                if(isAnswerWrong) setIsAnswerWrong(false)
+                                                // pauseGame()
+                                                
+                                                sfx.fail_track.stop();
+                                                sfx.success_track.stop();
+                                                sfx.game_track.stop();
+                                                sfx.gamewin_track.play();
+
+                                                return
+
+                                                // return (
+                                                //     <Grid item container className={classes.qs_board_main_container}
+                                                //         xl={11}
+                                                //         lg={11}
+                                                //         md={11}
+                                                //         sm={11}
+                                                //         xs={11}
+                                                //     >
+                                                //         <Grid item className={classes.gamewin_bg}>
+                                                //            <AnimateOnWin></AnimateOnWin>
+                                                //         </Grid>
+                                                //     </Grid>
+                                                // )
+                                            }
+                                        }
+                                    }}
+                                ></Grid>
                             </Grid>
                         </Grid>
                     </>
-                ) : !displayQSBoard && !isAnswerCorrect ? ( // if answer is wrong
+                ) : !isGameWin && !displayQSBoard && !isAnswerCorrect && failScore > 0 ? ( // if answer is wrong
                     <>
                         <Grid item container className={classes.answer_status_main_container}
                               xl={11}
@@ -361,9 +500,9 @@ function Game(props) {
                               xs={11}
                         >
                             <Grid item container className={classes.red_cross_main_container}>
-                                <Grid item container className={classes.txt_answer_container}>
-                                    <Typography variant='h4'>Correct Answer is : 4</Typography>
-                                </Grid>
+                                {/* <Grid item container className={classes.txt_answer_container}>
+                                    <Typography variant='h4'>Correct Answer is : {solution}</Typography>
+                                </Grid> */}
                                 <Grid item className={classes.sad_tomato_container}></Grid>
                                 <Grid item container justifyContent='center'>
                                     <Grid item className={classes.red_cross_container}></Grid>
@@ -371,7 +510,18 @@ function Game(props) {
                             </Grid>
                         </Grid>
                         <Grid container justifyContent='flex-end'>
-                            <Grid item className={classes.btn_next_container}></Grid>
+                            <Grid 
+                                item 
+                                className={classes.btn_next_container}
+                                onClick={()=>{
+                                    console.log("clicked NEXT btn")
+                                    if(isAnswerCorrect) setIsAnswerCorrect(false)
+                                    if(isAnswerWrong) setIsAnswerWrong(false)
+                                    handlePauseResume()
+                                    setDisplayQSBoard(true)
+                                    loadQuestion();
+                                }}
+                            ></Grid>
                         </Grid>
                     </>
                 ) : null}
@@ -401,6 +551,17 @@ function Game(props) {
                     </Grid>
                 </>
             ) : null}
+
+
+            <MySnackBar
+                open={openAlert.open}
+                alert={openAlert.alert}
+                severity={openAlert.severity}
+                variant={openAlert.variant}
+                onClose={() => {
+                    setOpenAlert({ open: false });
+                }}
+            />
         </Grid>
     )
 }

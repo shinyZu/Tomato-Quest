@@ -68,35 +68,47 @@ function Register(props) {
 
     const registerUser = async (e) => {
         console.log(registerFormData);
-        let res = await PlayerService.createPlayer(registerFormData);
-        console.log(res)
-        
-        if (res.status === 201) {
-            if (res) {
+        await PlayerService.createPlayer(registerFormData)
+            .then(res => {
                 console.log(res);
+               
+                if (res.status === 201) {
+                    if (res) {
+                        console.log(res);
+                        setOpenAlert({
+                            open: true,
+                            alert: res.data.message,
+                            severity: "success",
+                            variant: "standard",
+                        })
+        
+                        // Converting the loginFormData object to a JSON string and store it in localStorage
+                        localStorage.setItem('loggedPlayer', JSON.stringify(registerFormData));
+        
+                        setTimeout(()=>{
+                            window.location.href="/home";
+                        },1500)
+                    }
+                } else {
+                  setOpenAlert({
+                    open: true,
+                    alert: res.response.data.message,
+                    severity: "error",
+                    variant: "standard",
+                  });
+                }
+
+            })
+            .catch(error => {
                 setOpenAlert({
                     open: true,
-                    alert: res.data.message,
-                    severity: "success",
+                    alert: "Error!",
+                    severity: "error",
                     variant: "standard",
                 })
-
-                // Converting the loginFormData object to a JSON string and store it in localStorage
-                localStorage.setItem('loggedPlayer', JSON.stringify(registerFormData));
-
-                setTimeout(()=>{
-                    window.location.href="/home";
-                },1500)
-            }
-        } else {
-          setOpenAlert({
-            open: true,
-            alert: res.response.data.message,
-            severity: "error",
-            variant: "standard",
-          });
-        }
+            })
     }
+        
 
     return (
         <Grid

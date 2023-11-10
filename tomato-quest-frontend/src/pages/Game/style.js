@@ -1,4 +1,4 @@
-import background from "../../assets/images/background/14.jpg"
+import background from "../../assets/images/background/9.jpg"
 
 import btn_home from "../../assets/images/controls/home.png"
 import btn_restart from "../../assets/images/controls/restart.png"
@@ -15,7 +15,7 @@ import score_wrong_icon from "../../assets/images/game_page/wrong_score.png"
 import qs_board from "../../assets/images/game_page/qs_board.png"
 // import qs_board from "../../assets/images/game_page/qs_board_2.png"
 // import qs_board from "../../assets/images/game_page/wooden_board_3.png"
-import sample_qs from "../../assets/images/game_page/equation_qs.png"
+// import sample_qs from "../../assets/images/game_page/equation_qs.png"
 
 import answer_0 from "../../assets/images/game_page/answers/zero.png"
 import answer_1 from "../../assets/images/game_page/answers/one.png"
@@ -36,6 +36,8 @@ import img_gameover from "../../assets/images/game_page/img_gameover.png"
 import img_gamewin from "../../assets/images/game_page/img_gamewin_2.png"
 
 import styled, { keyframes } from 'styled-components';
+
+let sample_qs = "https://www.sanfoh.com/uob/tomato/data/t3a25c08cf8431edbe0a9135ba9n543.png";
 
 export const styleSheet = {
     main_container: {
@@ -225,7 +227,7 @@ export const styleSheet = {
     qs_board_container: {
         // border:'2px solid red',
         height: "65vh",
-        width: "60vh",
+        width: "50vh",
         backgroundImage: `url(${qs_board})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
@@ -238,14 +240,14 @@ export const styleSheet = {
     },
     qs_container: {
         // border:'2px solid blue',
-        height: "450px",
-        width: "250px",
-        backgroundImage: `url(${sample_qs})`,
+        height: "25vh",
+        width: "50vh",
+        // backgroundImage: `url(${sample_qs})`,
         backgroundSize: "cover",
-        transform: "rotate(90deg)",
+        // transform: "rotate(90deg)",
         backgroundPosition: "center",
         // marginTop:"-250px !important", // qs_board_2
-        marginTop: "280px !important" // qs_board
+        marginTop: "33.5vh !important", // qs_board
     },
     //----------------------------------------------------------
     answer_container: {

@@ -58,35 +58,6 @@ function Login(props) {
     const loginUser = async (e) => {
         console.log(loginFormData)
 
-        // let res = await LoginService.login(loginFormData);
-        // console.log(res);
-    
-        // if (res.status === 200) {
-        //   if (res) {
-        //     setOpenAlert({
-        //         open: true,
-        //         alert: res.data.message,
-        //         severity: "success",
-        //         variant: "standard",
-        //     })
-
-        //     // Converting the loginFormData object to a JSON string and store it in localStorage
-        //     localStorage.setItem('loggedPlayer', JSON.stringify(loginFormData));
-
-        //     setTimeout(()=>{
-        //         window.location.href="/home";
-        //     },2000)
-        //   }
-        // } else {
-        //   setOpenAlert({
-        //     open: true,
-        //     alert: res.response.data.message,
-        //     severity: "error",
-        //     variant: "standard",
-        //   });
-        // }
-
-
         await LoginService.login(loginFormData)
             .then(res => {
                 console.log(res);
