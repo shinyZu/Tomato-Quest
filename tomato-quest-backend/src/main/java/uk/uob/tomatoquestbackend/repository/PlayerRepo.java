@@ -11,7 +11,8 @@ public interface PlayerRepo extends JpaRepository<Player, Integer> {
 
     Player getLoginByUsernameAndPassword(String username, String password);
 
-    @Query(value = "select new Player(p.email, p.username, p.success_score, p.failure_score) from Player p order by p.success_score desc , p.failure_score")
+//    @Query(value = "select new Player(p.email, p.username, p.success_score, p.failure_score) from Player p order by p.success_score desc , p.failure_score")
+    @Query(value = "select p.email, p.username, p.password, p.success_score, p.failure_score from Player p order by p.success_score desc , p.failure_score limit 3", nativeQuery=true)
     List<Player> getTopPlayerScores();
 
     @Query(value = "select new Player(p.email, p.username, p.password, p.success_score, p.failure_score) from Player p")

@@ -56,6 +56,7 @@ public class LoginServiceImpl implements LoginService {
             System.out.println("player----" + player);
 
             if (player != null) {
+                dto.setPassword(player.getPassword());
                 LoginDTO loggedPlayer = mapper.map(loginRepo.save(mapper.map(dto, Login.class)), LoginDTO.class);
                 System.out.println("loggedPlayer----" + loggedPlayer);
                 return mapper.map(player, PlayerDTO.class);

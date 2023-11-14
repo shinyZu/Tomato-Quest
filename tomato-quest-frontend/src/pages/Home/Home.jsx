@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {withStyles} from "@mui/styles";
 import {styleSheet} from "./style";
 
@@ -54,34 +54,6 @@ const Home = (props) => {
             username: loggedPlayer.username,
         };
 
-        // let res = await LoginService.logout(params);
-        // console.log(res);
-    
-        // if (res.status === 200) {
-        //   if (res) {
-        //     setOpenAlert({
-        //         open: true,
-        //         alert: res.data.message,
-        //         severity: "success",
-        //         variant: "standard",
-        //     })
-
-        //     // Removing the item from localStorage
-        //     localStorage.removeItem('loggedPlayer');
-
-        //     setTimeout(()=>{
-        //         window.location.href = "/";
-        //     },2000)
-        //   }
-        // } else {
-        //   setOpenAlert({
-        //     open: true,
-        //     alert: res.response.data.message,
-        //     severity: "error",
-        //     variant: "standard",
-        //   });
-        // }
-
         await LoginService.logout(params)
             .then(res => {
                 console.log(res);
@@ -121,6 +93,16 @@ const Home = (props) => {
                 })
             })
     }
+
+    useEffect(()=>{
+        console.log("Home component did mount")
+        const player = localStorage.getItem("loggedPlayer");
+        if (player) {
+            props.handleLogin(true);
+        }  else {
+            props.handleLogin(false);
+        }
+    },[])
 
     return (
         <div className={classes.container_1}>

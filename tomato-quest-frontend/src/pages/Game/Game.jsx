@@ -228,6 +228,16 @@ function Game(props) {
     }
 
     useEffect(()=>{
+        console.log("Home component did mount")
+        const player = localStorage.getItem("loggedPlayer");
+        if (player) {
+            props.handleLogin(true);
+        }  else {
+            props.handleLogin(false);
+        }
+    },[])
+
+    useEffect(()=>{
         loadQuestion();
     },[])
 
