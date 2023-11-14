@@ -8,6 +8,7 @@ import btn_sound from "../../assets/images/controls/sounds_on.png"
 import btn_timer from "../../assets/images/controls/timer.png"
 import btn_level from "../../assets/images/controls/level.png"
 import btn_next from "../../assets/images/controls/next.png"
+import btn_leaderboard from "../../assets/images/game_page/btn_leaderboard.png"
 
 import score_correct_icon from "../../assets/images/game_page/correct_score.png"
 import score_wrong_icon from "../../assets/images/game_page/wrong_score.png"
@@ -80,8 +81,6 @@ export const styleSheet = {
         marginRight: "10px !important",
         "&:hover": {
             cursor: "pointer",
-            // height:"6vh",
-            // width:"6vh",
             transform: "rotate(10deg)",
         },
     },
@@ -96,8 +95,6 @@ export const styleSheet = {
         marginRight: "10px !important",
         "&:hover": {
             cursor: "pointer",
-            // height:"6vh",
-            // width:"6vh",
             transform: "rotate(10deg)",
         },
     },
@@ -112,8 +109,6 @@ export const styleSheet = {
         marginRight: "10px !important",
         "&:hover": {
             cursor: "pointer",
-            // height:"6vh",
-            // width:"6vh",
             transform: "rotate(10deg)",
         },
     },
@@ -128,8 +123,6 @@ export const styleSheet = {
         marginRight: "10px !important",
         "&:hover": {
             cursor: "pointer",
-            // height:"6vh",
-            // width:"6vh",
             transform: "rotate(10deg)",
         },
     },
@@ -144,8 +137,6 @@ export const styleSheet = {
         marginRight: "10px !important",
         "&:hover": {
             cursor: "pointer",
-            // height:"6vh",
-            // width:"6vh",
             transform: "rotate(10deg)",
         },
     },
@@ -270,8 +261,6 @@ export const styleSheet = {
         backgroundPosition: "center",
         "&:hover": {
             cursor: "pointer",
-            // height:"13vh",
-            // width:"10vh",
             transform: "rotate(5deg)",
         },
     },
@@ -284,8 +273,6 @@ export const styleSheet = {
         backgroundPosition: "center",
         "&:hover": {
             cursor: "pointer",
-            // height:"15vh",
-            // width:"8vh",
             transform: "rotate(5deg)",
         },
     },
@@ -298,8 +285,6 @@ export const styleSheet = {
         backgroundPosition: "center",
         "&:hover": {
             cursor: "pointer",
-            // height:"13vh",
-            // width:"10vh",
             transform: "rotate(5deg)",
         },
     },
@@ -312,8 +297,6 @@ export const styleSheet = {
         backgroundPosition: "center",
         "&:hover": {
             cursor: "pointer",
-            // height:"13vh",
-            // width:"10vh",
             transform: "rotate(5deg)",
         },
     },
@@ -326,8 +309,6 @@ export const styleSheet = {
         backgroundPosition: "center",
         "&:hover": {
             cursor: "pointer",
-            // height:"13vh",
-            // width:"10vh",
             transform: "rotate(5deg)",
         },
     },
@@ -340,8 +321,6 @@ export const styleSheet = {
         backgroundPosition: "center",
         "&:hover": {
             cursor: "pointer",
-            // height:"13vh",
-            // width:"10vh",
             transform: "rotate(5deg)",
         },
     },
@@ -354,8 +333,6 @@ export const styleSheet = {
         backgroundPosition: "center",
         "&:hover": {
             cursor: "pointer",
-            // height:"13vh",
-            // width:"10vh",
             transform: "rotate(5deg)",
         },
     },
@@ -368,8 +345,6 @@ export const styleSheet = {
         backgroundPosition: "center",
         "&:hover": {
             cursor: "pointer",
-            // height:"13vh",
-            // width:"10vh",
             transform: "rotate(5deg)",
         },
     },
@@ -382,8 +357,6 @@ export const styleSheet = {
         backgroundPosition: "center",
         "&:hover": {
             cursor: "pointer",
-            // height:"13vh",
-            // width:"10vh",
             transform: "rotate(5deg)",
         },
     },
@@ -396,8 +369,6 @@ export const styleSheet = {
         backgroundPosition: "center",
         "&:hover": {
             cursor: "pointer",
-            // height:"13vh",
-            // width:"10vh",
             transform: "rotate(5deg)",
         },
     },
@@ -476,10 +447,21 @@ export const styleSheet = {
         "&:hover": {
             cursor: "pointer",
             transform: "rotate(10deg)",
-            // height:"12vh",
-            // width:"12vh",
         },
-        
+    },
+    btn_restart_game_container: {
+        // border:'2px solid blue',
+        height: "10vh",
+        width: "10vh",
+        transform: "rotate(0deg)",
+        backgroundImage: `url(${btn_leaderboard})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        marginRight: "20px !important",
+        "&:hover": {
+            cursor: "pointer",
+            transform: "rotate(10deg)",
+        },
     },
 
     //----------------------------------
@@ -549,6 +531,7 @@ const zoomRotateKeyframes = keyframes`
 `;
 
 export const AnimateOnWin = styled.div`
+  /* border:2px solid red; */
   height: 55vh;
   width: 65vh;
   background-image: url(${img_gamewin});
@@ -584,8 +567,10 @@ const gameOverKeyframes = keyframes`
 `;
 
 export const AnimateOnGameOver = styled.div`
-  height: 65vh;
-  width: 80vh;
+  height: 55vh;
+  width: 70vh;
+  /* height: 40vh; */
+  /* width: 40vh; */
   background-image: url(${img_gameover});
   background-size: cover;
   background-position: center;

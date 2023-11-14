@@ -26,7 +26,7 @@ public class LoginServiceImpl implements LoginService {
     private PlayerRepo playerRepo;
 
     @Override
-    public boolean login(LoginDTO dto) {
+    public PlayerDTO login(LoginDTO dto) {
         System.out.println("Service login : " + dto);
         try {
             Player player = playerRepo.getLoginByUsernameAndPassword(dto.getUsername(), dto.getPassword());
@@ -35,9 +35,9 @@ public class LoginServiceImpl implements LoginService {
             if(player != null){
                 LoginDTO loggedPlayer = mapper.map(loginRepo.save(mapper.map(dto, Login.class)), LoginDTO.class);
                 System.out.println("loggedPlayer----" + loggedPlayer);
-                return true;
+                return mapper.map(player, PlayerDTO.class);
             }
-            return false;
+            return null;
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }

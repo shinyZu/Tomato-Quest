@@ -72,7 +72,7 @@ function Login(props) {
                       })
           
                       // Converting the loginFormData object to a JSON string and store it in localStorage
-                      localStorage.setItem('loggedPlayer', JSON.stringify(loginFormData));
+                      localStorage.setItem('loggedPlayer', JSON.stringify(res.data.data));
           
                       setTimeout(()=>{
                           window.location.href="/home";

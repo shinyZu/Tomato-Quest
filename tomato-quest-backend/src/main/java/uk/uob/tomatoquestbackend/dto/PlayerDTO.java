@@ -14,4 +14,25 @@ public class PlayerDTO {
     private String email;
     private String username;
     private String password;
+    private int success_score;
+    private int failure_score;
+
+    public PlayerDTO(String email, String username, String password) {
+        this.email = email;
+        this.username = username;
+        this.password = password;
+    }
+
+    public PlayerDTO(String email, int success_score, int failure_score) {
+        this.email = email;
+        this.success_score = success_score;
+        this.failure_score = failure_score;
+    }
+
+    public PlayerDTO(String email, String username, int success_score, int failure_score) {
+        this.email = email;
+        this.username = username;
+        this.success_score = success_score;
+        this.failure_score = failure_score;
+    }
 }

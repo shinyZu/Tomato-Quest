@@ -1,5 +1,6 @@
 package uk.uob.tomatoquestbackend.service.impl;
 
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -7,12 +8,13 @@ import uk.uob.tomatoquestbackend.dto.LoginDTO;
 import uk.uob.tomatoquestbackend.dto.PlayerDTO;
 import uk.uob.tomatoquestbackend.entity.Login;
 import uk.uob.tomatoquestbackend.entity.Player;
-import uk.uob.tomatoquestbackend.exception.ServiceException;
 import uk.uob.tomatoquestbackend.repository.LoginRepo;
 import uk.uob.tomatoquestbackend.repository.PlayerRepo;
 import uk.uob.tomatoquestbackend.service.PlayerService;
 
 import org.modelmapper.ModelMapper;
+
+import java.util.List;
 
 @Service
 @Transactional
@@ -48,5 +50,27 @@ public class PlayerServiceImpl implements PlayerService {
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
+    }
+
+    @Override
+    public PlayerDTO saveScore(PlayerDTO dto) {
+        System.out.println("Service player : " + dto);
+        Player playerByEmail = playerRepo.getPlayerByEmail(dto.getEmail());
+        if (playerByEmail != null) {
+            playerByEmail.setSuccess_score(dto.getSuccess_score());
+            playerByEmail.setFailure_score(dto.getFailure_score());
+            return mapper.map(playerRepo.save(playerByEmail), PlayerDTO.class);
+        }
+        return null;
+    }
+
+    @Override
+    public List<PlayerDTO> getHighestScores() {
+        System.out.println("Service player : getHighestScores ");
+//        List<Player> topPlayerScores = playerRepo.getTopPlayerScores();
+//        for (Player player : topPlayerScores) {
+//            System.out.println(player.getEmail() + " : " + player.getSuccess_score() + " : " + player.getFailure_score());
+//        }
+        return mapper.map(playerRepo.getTopPlayerScores(), new TypeToken<List<PlayerDTO>>() {}.getType());
     }
 }

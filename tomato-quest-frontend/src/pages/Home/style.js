@@ -4,6 +4,7 @@ import btn_settings from "../../assets/images/controls/settings.png"
 import btn_help from "../../assets/images/controls/help.png"
 import btn_sounds from "../../assets/images/controls/sounds_on.png"
 import btn_logout from "../../assets/images/controls/timer.png"
+import btn_leaderboard from "../../assets/images/game_page/btn_leaderboard.png"
 
 export const styleSheet = {
     container_1: {
@@ -107,6 +108,22 @@ export const styleSheet = {
         backgroundImage: `url(${btn_logout})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
+        "&:hover": {
+            cursor: "pointer",
+            transform: "rotate(10deg)",
+        },
+    },
+    btn_leaderboard_container: {
+        // border:'2px solid blue',
+        position:"absolute",
+        height: "10vh",
+        width: "10vh",
+        transform: "rotate(0deg)",
+        backgroundImage: `url(${btn_leaderboard})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        marginLeft: "20px !important",
+        marginTop: "20px !important",
         "&:hover": {
             cursor: "pointer",
             transform: "rotate(10deg)",

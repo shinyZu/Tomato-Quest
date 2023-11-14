@@ -10,12 +10,12 @@ import lombok.ToString;
 @Data
 @ToString
 public class ResponseUtil {
-    private int code;
+    private int status;
     private String message;
     private Object data;
 
-    public ResponseUtil(int code, String message) {
-        this.code = code;
+    public ResponseUtil(int status, String message) {
+        this.status = status;
         this.message = message;
     }
 }

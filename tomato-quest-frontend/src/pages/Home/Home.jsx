@@ -133,6 +133,17 @@ const Home = (props) => {
                 xs={12}
                 className={classes.main_container}
             >
+                 {/* <Grid container justifyContent='flex-end' style={{border:"2px solid red"}}> */}
+                 <Grid 
+                        item 
+                        className={classes.btn_leaderboard_container}
+                        onClick={()=>{
+                            console.log("navigate to leaderboard")
+                            window.location.href = "/leaderboard";
+                        }}
+                    ></Grid>
+                {/* </Grid> */}
+                
                 <Grid
                     item
                     container
@@ -153,6 +164,7 @@ const Home = (props) => {
                         <Grid item className={classes.logout_controls_container} onClick={logoutUser}></Grid>
                     </Grid>
                 </Grid>
+               
                 <Grid item container className={classes.bottom_container}>
                     <Grid item className={classes.btn_play_container} onClick={() => {
                         console.log("Play btn clicked")

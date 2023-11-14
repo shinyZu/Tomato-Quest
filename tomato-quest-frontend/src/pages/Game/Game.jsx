@@ -6,6 +6,10 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import MySnackBar from "../../components/common/MySnackbar/MySnackbar";
 
+import background1 from "../../assets/images/background/7.jpg"
+import background2 from "../../assets/images/background/8.jpg"
+import background3 from "../../assets/images/background/9.jpg"
+
 import btn_sound_on from "../../assets/images/controls/sounds_on.png"
 import btn_sound_off from "../../assets/images/controls/sounds_off.png"
 import btn_play from "../../assets/images/controls/play.png"
@@ -23,6 +27,8 @@ import gamewin_track from "../../assets/audio/game_win_2.mp3"
 import { AnimateOnWin } from './style'; 
 import { AnimateOnGameOver } from './style'; 
 import GameService from '../../services/GameService';
+import ScoreService from '../../services/ScoreService';
+import PlayerService from '../../services/PlayerService';
 
 var sfx = {
     game_track : new Howl({
@@ -68,9 +74,9 @@ function Game(props) {
     const [failScore, setFailScore] = useState(3);
     
     const [currentLevel, setCurrentLevel] = useState(1);
-    const [level1Rounds, setLevel1Rounds] = useState(2);
-    const [level2Rounds, setLevel2Rounds] = useState(3);
-    const [level3Rounds, setLevel3Rounds] = useState(4);
+    const [level1Rounds, setLevel1Rounds] = useState(1);
+    const [level2Rounds, setLevel2Rounds] = useState(1);
+    const [level3Rounds, setLevel3Rounds] = useState(1);
 
     const [openAlert, setOpenAlert] = useState({
         open: false,
@@ -125,6 +131,36 @@ function Game(props) {
     //     setIsGamePaused(false)
     // }
 
+    // To save score
+    const setScore = async (latestSuccessScore, latestFailedScore) => {
+        const loggedPlayerJSON = localStorage.getItem('loggedPlayer');
+        const loggedPlayer = JSON.parse(loggedPlayerJSON);
+        console.log(loggedPlayer.email)
+
+
+        let data = {
+            success_score: latestSuccessScore,
+            failure_score: latestFailedScore,
+            email:loggedPlayer.email,
+        };
+
+        console.log(data)
+
+        await PlayerService.saveScore(data)
+            .then(res => {
+                console.log(res);
+            })
+            .catch(error => {
+                setOpenAlert({
+                    open: true,
+                    alert: "Error!",
+                    severity: "error",
+                    variant: "standard",
+                })
+            })
+
+    }
+
     // To check the answer
     const checkAnswer = (selectedAnswer) => {
         setIsGameTrackPlaying(false)
@@ -137,6 +173,7 @@ function Game(props) {
             setIsAnswerCorrect(true)
             setDisplayQSBoard(false)
             setSuccessScore((prevScore) => prevScore + 10)
+            // setScore()
         } else{
             console.log("Answer is wrong play the defeat track")
             sfx.game_track.stop();
@@ -194,6 +231,17 @@ function Game(props) {
         loadQuestion();
     },[])
 
+    useEffect(()=>{
+        console.log(successScore)
+        let failedQs=0;
+        if(failScore == 3) failedQs = 0; 
+        if(failScore == 2) failedQs = 1; 
+        if(failScore == 1) failedQs = 2; 
+        if(failScore == 0) failedQs = 3; 
+        console.log(failedQs)
+        setScore(successScore, failedQs)
+    },[successScore])
+
     useEffect(() => {
         let timer;
     
@@ -235,6 +283,7 @@ function Game(props) {
             sm={12}
             xs={12}
             className={classes.main_container}
+            style={{backgroundImage: currentLevel == 1 ? `url(${background1})` : currentLevel == 2 ? `url(${background2})` : currentLevel == 3 ? `url(${background3})` : `url(${background1})`}}
         >
             {/* Top controls button bar */}
             <Grid conatiner className={classes.controls_bar_container}
@@ -244,7 +293,7 @@ function Game(props) {
                   sm={12}
                   xs={12}
             >
-                {/* Right side control buttons */}
+                {/* Left side control buttons */}
                 <Grid container
                       xl={6}
                       lg={6}
@@ -261,7 +310,7 @@ function Game(props) {
                     <Grid item className={classes.btn_labels}>Level: {currentLevel}</Grid>
                 </Grid>
 
-                {/* Left side control buttons */}
+                {/* Right side control buttons */}
                 <Grid container
                     xl={6}
                     lg={6}
@@ -376,10 +425,9 @@ function Game(props) {
                             sm={11}
                             xs={11}
                         >
-                            <Grid item className={classes.gamewin_bg}>
+                            <Grid item /* className={classes.gamewin_bg} */>
                                 {/* <Grid item className={classes.gamewin_bg}></Grid> */}
                                 <AnimateOnGameOver></AnimateOnGameOver>
-                                 {/* <AnimateOnWin></AnimateOnWin> */}
                             </Grid>
                         </Grid>
                     </>
@@ -388,18 +436,48 @@ function Game(props) {
                 {isGameWin && (
                      <>
                      {/* Game Win image */}
-                     <Grid item container className={classes.qs_board_main_container}
+                     <Grid item container className={classes.answer_status_main_container}
                          xl={11}
                          lg={11}
                          md={11}
                          sm={11}
                          xs={11}
                      >
-                         <Grid item className={classes.gamewin_bg}>
-                             {/* <Grid item className={classes.gamewin_bg}></Grid> */}
-                             {/* <AnimateOnGameOver></AnimateOnGameOver> */}
-                              <AnimateOnWin></AnimateOnWin>
-                         </Grid>
+                        {/* <Grid item container className={classes.green_tick_main_container}>
+                            <Grid item container className={classes.txt_answer_container}>
+                                <Typography variant='h4'>Your Score : {successScore}</Typography>
+                            </Grid>
+                            <Grid item>
+                                <AnimateOnWin></AnimateOnWin>
+                            </Grid>
+                        </Grid>     */}
+                        <Grid item container className={classes.answer_status_main_container}
+                              xl={11}
+                              lg={11}
+                              md={11}
+                              sm={11}
+                              xs={11}
+                        >
+                            <Grid item container className={classes.red_cross_main_container}>
+                                <Grid item container className={classes.txt_answer_container}>
+                                <Typography variant='h4'>Your Score : {successScore}</Typography>
+                            </Grid>
+                                <AnimateOnWin></AnimateOnWin>
+                            </Grid>
+                        </Grid>
+                        <Grid container justifyContent='flex-end' >
+                            <Grid 
+                                item 
+                                className={classes.btn_restart_game_container}
+                                onClick={()=>{
+                                    console.log("navigate to leaderboard")
+                                    if(isAnswerCorrect) setIsAnswerCorrect(false)
+                                    if(isAnswerWrong) setIsAnswerWrong(false)
+                                    handlePauseResume();
+                                    window.location.href = "/leaderboard";
+                                }}
+                            ></Grid>
+                        </Grid>
                      </Grid>
                  </>
                 )}

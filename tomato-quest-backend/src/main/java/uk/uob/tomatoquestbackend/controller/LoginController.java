@@ -6,6 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uk.uob.tomatoquestbackend.dto.LoginDTO;
+import uk.uob.tomatoquestbackend.dto.PlayerDTO;
 import uk.uob.tomatoquestbackend.service.LoginService;
 import uk.uob.tomatoquestbackend.util.ResponseUtil;
 
@@ -28,8 +29,9 @@ public class LoginController {
     @PostMapping(path = "player/log", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity login(@RequestBody LoginDTO dto){
         System.out.println("Controller login : " + dto);
-        if (loginService.login(dto)) {
-            return new ResponseEntity(new ResponseUtil(HttpServletResponse.SC_OK, "Player logged in successfully!"), HttpStatus.OK);
+        PlayerDTO loggedPlayer = loginService.login(dto);
+        if (loggedPlayer != null) {
+            return new ResponseEntity(new ResponseUtil(HttpServletResponse.SC_OK, "Player logged in successfully!", loggedPlayer ), HttpStatus.OK);
         } else {
             return new ResponseEntity(new ResponseUtil(HttpServletResponse.SC_NOT_FOUND, "Invalid credentials. Please try again!"), HttpStatus.NOT_FOUND);
         }
