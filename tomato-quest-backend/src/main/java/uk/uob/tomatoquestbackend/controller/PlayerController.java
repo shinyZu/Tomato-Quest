@@ -5,10 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import uk.uob.tomatoquestbackend.dto.CommonResponseDTO;
 import uk.uob.tomatoquestbackend.dto.LoginDTO;
 import uk.uob.tomatoquestbackend.dto.PlayerDTO;
-import uk.uob.tomatoquestbackend.entity.Player;
 import uk.uob.tomatoquestbackend.service.PlayerService;
 import uk.uob.tomatoquestbackend.util.ResponseUtil;
 
@@ -23,8 +21,15 @@ public class PlayerController {
     @Autowired
     PlayerService playerService;
 
+    @GetMapping(path = "getAll", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseUtil getAll(){
+        System.out.println("Controller player : getAll");
+        return new ResponseUtil(HttpServletResponse.SC_OK,"All players", playerService.getAll());
+    }
+
     @PostMapping(path = "save", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity registerPlayer (@RequestBody PlayerDTO dto) {
+        System.out.println("Controller player : registerPlayer : " + dto);
         System.out.println(dto);
         LoginDTO savedPlayer = playerService.savePlayer(dto);
         if(savedPlayer != null) {
@@ -32,7 +37,6 @@ public class PlayerController {
         } else {
             return new ResponseEntity(new ResponseUtil(HttpServletResponse.SC_NOT_FOUND, "Player already exists. Please try to login!"), HttpStatus.NOT_FOUND);
         }
-//        return new ResponseEntity(new CommonResponseDTO(true, "Player registered successfully!" , playerService.savePlayer(dto)), HttpStatus.OK);
     }
 
     @GetMapping(path = "score/getAll", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -54,6 +58,16 @@ public class PlayerController {
             return new ResponseEntity(new ResponseUtil(HttpServletResponse.SC_OK, "Score saved successfully!", savedScore), HttpStatus.OK);
         } else {
             return new ResponseEntity(new ResponseUtil(HttpServletResponse.SC_NOT_FOUND, "Error while saving score!"), HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping(path = "delete", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity deletePlayer(@RequestParam String email) {
+        System.out.println("Controller player : " + email);
+        if (playerService.deletePlayer(email)) {
+            return new ResponseEntity(new ResponseUtil(HttpServletResponse.SC_OK, "Player deleted successfully!"), HttpStatus.OK);
+        } else {
+            return new ResponseEntity(new ResponseUtil(HttpServletResponse.SC_NOT_FOUND, "Error while deleting player!"), HttpStatus.NOT_FOUND);
         }
     }
 }

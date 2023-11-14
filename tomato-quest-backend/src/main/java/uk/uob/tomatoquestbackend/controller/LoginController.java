@@ -20,10 +20,10 @@ public class LoginController {
     @Autowired
     LoginService loginService;
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "getAll", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseUtil getAll(){
-        System.out.println("getAll of login");
-        return new ResponseUtil(HttpServletResponse.SC_OK,"Get All", "Working fine");
+        System.out.println("Controller login : getAll");
+        return new ResponseUtil(HttpServletResponse.SC_OK,"All logins", loginService.getAll());
     }
 
     @PostMapping(path = "player/log", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

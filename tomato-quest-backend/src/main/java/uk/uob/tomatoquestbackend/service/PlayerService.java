@@ -12,4 +12,8 @@ public interface PlayerService {
     PlayerDTO saveScore(PlayerDTO dto);
 
     List<PlayerDTO> getHighestScores();
+
+    boolean deletePlayer(String email);
+
+    List<PlayerDTO> getAll();
 }
