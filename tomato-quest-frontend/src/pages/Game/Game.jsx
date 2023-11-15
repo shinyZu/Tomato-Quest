@@ -74,9 +74,9 @@ function Game(props) {
     const [failScore, setFailScore] = useState(3);
     
     const [currentLevel, setCurrentLevel] = useState(1);
-    const [level1Rounds, setLevel1Rounds] = useState(1);
-    const [level2Rounds, setLevel2Rounds] = useState(1);
-    const [level3Rounds, setLevel3Rounds] = useState(1);
+    const [level1Rounds, setLevel1Rounds] = useState(2);
+    const [level2Rounds, setLevel2Rounds] = useState(3);
+    const [level3Rounds, setLevel3Rounds] = useState(4);
 
     const [openAlert, setOpenAlert] = useState({
         open: false,

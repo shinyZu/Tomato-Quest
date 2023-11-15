@@ -132,11 +132,11 @@ function Register(props) {
             >
                 <Grid
                     container
-                    xl={11}
-                    lg={11}
-                    md={11}
-                    sm={11}
-                    xs={11}
+                    xl={9}
+                    lg={9}
+                    md={9}
+                    sm={9}
+                    xs={9}
                     className={classes.glass_container}>
                     <Grid
                         item
@@ -150,11 +150,11 @@ function Register(props) {
                     >
                         <Grid
                             item
-                            xl={4}
-                            lg={4}
-                            md={4}
-                            sm={4}
-                            xs={4}
+                            xl={6}
+                            lg={6}
+                            md={6}
+                            sm={6}
+                            xs={6}
                             className={classes.title_tag}
                         >
                         </Grid>
@@ -179,7 +179,7 @@ function Register(props) {
                                 // fullWidth
                                 // required={true}
                                 style={{marginBottom: "20px"}}
-                                inputProps={{min: 0, style: {textAlign: 'center', color: "black", fontSize: "2rem"}}}
+                                inputProps={{min: 0, style: {textAlign: 'center', color: "black", fontSize: "1.5rem"}}}
                                 validators={["matchRegexp:^[A-z|0-9]{4,}@(gmail)(.com|.lk)$"]}
                                 errorMessages={["Invalid email address"]}
                                 value={registerFormData.email}
@@ -205,7 +205,7 @@ function Register(props) {
                                 // fullWidth
                                 // required={true}
                                 style={{marginBottom: "20px"}}
-                                inputProps={{min: 0, style: {textAlign: 'center', color: "black", fontSize: "2rem"}}}
+                                inputProps={{min: 0, style: {textAlign: 'center', color: "black", fontSize: "1.5rem"}}}
                                 validators={["matchRegexp:^[A-z|0-9]{5,}$"]}
                                 errorMessages={["Should have atleast 5 character"]}
                                 value={registerFormData.username}
@@ -235,7 +235,7 @@ function Register(props) {
                                     style: {
                                         textAlign: 'center',
                                         color: "black",
-                                        fontSize: "2rem",
+                                        fontSize: "1.5rem",
                                         outline: "none",
                                         border: "none"
                                     }

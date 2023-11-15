@@ -150,7 +150,7 @@ function Leaderboard(props) {
                                 xs={2}
                                 className={classes.txt_container}
                             >
-                                <span style={{fontSize:"1rem", color:"white", marginLeft:"3vh" }}>Rank</span>
+                                <span style={{fontSize:"1rem", color:"#f1c40f", marginLeft:"3vh" }}>Rank</span>
                             </Grid>
                             <Grid
                                 item
@@ -183,7 +183,7 @@ function Leaderboard(props) {
                                 xs={2}
                                 className={classes.txt_container}
                             >
-                                <span style={{fontSize:"1rem", color:"white", }}>Score</span>
+                                <span style={{fontSize:"1rem", color:"#48dbfb", }}>Score</span>
                             </Grid>
                             <Grid
                                 item
@@ -194,7 +194,7 @@ function Leaderboard(props) {
                                 xs={1}
                                 className={classes.txt_container}
                             >
-                                <span style={{fontSize:"1rem", color:"orange", marginLeft:"5vh"}}>Fail</span>
+                                <span style={{fontSize:"1rem", color:"#ff6b6b", marginLeft:"5vh"}}>Fail</span>
                             </Grid>
                         </Grid>
 

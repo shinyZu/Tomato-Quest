@@ -30,7 +30,7 @@ function PlayerScore(props) {
                     xs={3}
                     className={classes.txt_container}
                 >
-                    <span style={{fontSize:"2.5rem", color:"white", }}>{props.rank}</span>
+                    <span style={{fontSize:"2.5rem", color:"#f1c40f", }}>{props.rank}</span>
                 </Grid>
                 <Grid
                     item
@@ -63,7 +63,7 @@ function PlayerScore(props) {
                     xs={2}
                     className={classes.txt_container}
                 >
-                    <span style={{fontSize:"1.5rem", color:"white",  marginRight:"3vh"}}>{props.score}</span>
+                    <span style={{fontSize:"1.5rem", color:"#48dbfb",  marginRight:"3vh"}}>{props.score}</span>
                 </Grid>
                 <Grid
                     item
@@ -74,7 +74,7 @@ function PlayerScore(props) {
                     xs={1}
                     className={classes.txt_container}
                 >
-                    <span style={{fontSize:"1rem", color:"orange", }}>- {props.failedScore}</span>
+                    <span style={{fontSize:"1rem", color:"#ff6b6b", }}>- {props.failedScore}</span>
                 </Grid>
             </Grid>
         </>
