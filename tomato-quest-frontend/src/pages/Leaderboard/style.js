@@ -58,7 +58,7 @@ export const styleSheet = {
     },
     title_tag: {
         // border: "2px solid red",
-        height: "18vh",
+        height: "17vh",
         backgroundImage: `url(${leaderboard_tag})`,
         backgroundSize: "cover",
         backgroundPosition: "center",

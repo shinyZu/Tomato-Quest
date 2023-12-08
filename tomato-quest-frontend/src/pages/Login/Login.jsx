@@ -169,7 +169,7 @@ function Login(props) {
                                 style={{marginBottom: "20px"}}
                                 inputProps={{min: 0, style: {textAlign: 'center', color: "black", fontSize: "1.5rem"}}}
                                 validators={["matchRegexp:^[A-z|0-9]{5,}$"]}
-                                errorMessages={["Invalid email address"]}
+                                errorMessages={["Invalid username, must contain atleast 5 characters"]}
                                 value={loginFormData.username}
                                 onChange={handleUsernameChange}
                             />
