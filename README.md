@@ -6,7 +6,7 @@
 
 <br>
 
-## 4 themes implemented
+## 4 Themes :
 
 <br>
 
@@ -31,7 +31,7 @@
 
 <br>
 
-## External APIs
+## External APIs :
 
 - Tomato API
 
